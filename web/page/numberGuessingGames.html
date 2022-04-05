@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NumberGuess</title>
+    <link href="/simple/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/simple/css/zui.min.css" rel="stylesheet"/>
+    <style>
+        * {
+            margin: 0 auto;
+        }
+        #number-guess-game {
+            margin-top: 10%;
+            width: 60%;
+            text-align: center;
+        }
+        .marginTop {
+            margin-top: 20px;;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div id="number-guess-game">
+        <span id="explain" class="marginTop">
+            猜数游戏 范围 1 ~ 100
+        </span>
+        <span id="tip"></span>
+        <div class="input-group marginTop">
+            <label>
+                <input type="text" class="form-control" id="guess">
+            </label>
+        </div>
+        <button type="button" class="btn btn-primary marginTop"
+                id="attempt">试一试</button>
+    </div>
+</div>
+<script src="/simple/js/jquery-3.6.0.min.js"></script>
+<script src="/simple/js/zui.min.js"></script>
+<script src="/simple/js/bootstrap.min.js"></script>
+<script>
+    document.getElementById("attempt").onclick = () => {
+
+        let guess = document.getElementById("guess").value;
+        let xhr = new XMLHttpRequest();
+        let url = "/simple/number-guessing-games?guess=" + guess;
+        xhr.open('GET', url);
+        xhr.send();
+        xhr.onreadystatechange = function () {
+            if (xhr.status === 200 && xhr.readyState === 4) {
+                let context = xhr.responseText;
+                console.log(context);
+                new $.zui.Messager(context, {
+                    icon: 'bell'
+                }).show();
+            }
+        };
+    }
+
+</script>
+</body>
+</html>

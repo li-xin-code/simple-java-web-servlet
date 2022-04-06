@@ -18,7 +18,39 @@
     out.println("当前用户:" + user);
 %>
 <p id="msg"></p>
+<div id="viewList">
+    <hr/>
+    <span>view-list</span>
+    <br/>
+</div>
 </body>
+<script type="module">
+    import {xhrGet} from "./js/common.js";
+
+    let listXhr = xhrGet("/simple/view-list");
+    listXhr.send();
+    listXhr.onreadystatechange = () => {
+        if (listXhr.status === 200 && listXhr.readyState === 4) {
+            let context = listXhr.responseText;
+            let list = context.split(";");
+            let viewList = document.getElementById("viewList");
+            list.forEach((viewName, index) => {
+                if (viewName !== "") {
+                    console.log(index + viewName);
+                    let link = "/simple/view/" + viewName;
+                    let a = document.createElement('a');
+                    a.setAttribute("href", link);
+                    a.innerText = viewName;
+                    viewList.appendChild(a);
+                    if (index < list.length - 1) {
+                        let br = document.createElement('br');
+                        viewList.appendChild(br);
+                    }
+                }
+            })
+        }
+    }
+</script>
 <script type="text/javascript">
     let xhr = new XMLHttpRequest();
     let url = "/simple/message";

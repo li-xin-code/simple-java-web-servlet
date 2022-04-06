@@ -1,5 +1,6 @@
 package com.lixin.servlet;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +10,7 @@ import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * @author lx
@@ -43,7 +45,6 @@ public class ViewServlet extends HttpServlet {
             String mainFileName = fillFileName.substring(0, fillFileName.lastIndexOf("."));
             viewMap.put(mainFileName, PREFIX + fillFileName);
         }));
-        getServletContext().setAttribute("viewList", viewMap.keySet());
         viewMap.keySet().forEach(s -> System.out.println(s + ":" + viewMap.get(s)));
     }
 
@@ -54,10 +55,15 @@ public class ViewServlet extends HttpServlet {
         String[] paths = uri.substring(1).split(SPLIT_CHAR);
         if (paths.length != PATH_LEN) {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND);
-            return;
         }
         String viewName = paths[paths.length - 1];
         String viewPath = viewMap.get(viewName);
+
+        String regex = "^.+\\.jsp$";
+        boolean isJspFile = Pattern.matches(regex, viewPath);
+        if (isJspFile) {
+            req.getRequestDispatcher(viewPath).forward(req, resp);
+        }
 
         InputStream in = null;
         try {

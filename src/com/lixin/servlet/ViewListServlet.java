@@ -28,4 +28,5 @@ public class ViewListServlet extends ViewServlet {
         PrintWriter writer = resp.getWriter();
         viewList.forEach(s -> writer.print(s + ";"));
     }
+
 }

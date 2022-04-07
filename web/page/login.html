@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <style>
+        * {
+            margin: 0 auto;
+        }
+
+        #login_form {
+            margin-top: 5%;
+            width: 40%;
+        }
+
+        #submit {
+            margin-top: 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        #login {
+            letter-spacing: 20px;
+            text-indent: 20px;
+            width: 30%;
+        }
+    </style>
+    <link href="/simple/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/simple/css/common.css" rel="stylesheet">
+</head>
+<body>
+<div id="login_form">
+    <h3>Login</h3>
+    <hr/>
+    <form id="form" action="/simple/login" method="post"
+          enctype="application/x-www-form-urlencoded">
+        <div class="form-group marginTop">
+            <label for="name">用户名</label>
+            <input type="text" class="form-control"
+                   name="username" id="name" placeholder="请输入用户名">
+        </div>
+        <div class="form-group marginTop">
+            <label for="password">密码</label>
+            <input type="password" class="form-control"
+                   name="password" id="password" placeholder="请输入密码">
+        </div>
+        <div id="submit" class="marginTop">
+            <input type="submit" class="btn btn-primary" id="login" value="登录"/>
+        </div>
+    </form>
+</div>
+<script src="/simple/js/jquery-3.6.0.min.js"></script>
+<script src="/simple/js/bootstrap.min.js"></script>
+</body>
+
+</html>

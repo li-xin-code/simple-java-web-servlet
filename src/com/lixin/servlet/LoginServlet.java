@@ -4,7 +4,6 @@ import com.lixin.model.entity.User;
 import com.lixin.service.LoginService;
 import com.lixin.service.impl.LoginServiceImpl;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

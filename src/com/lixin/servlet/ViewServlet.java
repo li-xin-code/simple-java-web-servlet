@@ -5,16 +5,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 /**
  * 响应页面请求
  * 初始化阶段扫描 {web/page/}目录加载页面文件
  * 文件名和路径存入viewMap
+ *
  * @author lx
  * @date 2022/4/5
  */
@@ -23,6 +30,7 @@ public class ViewServlet extends HttpServlet {
     private final static String PREFIX = "/page/";
     private final static String SPLIT_CHAR = "/";
     private final static int PATH_LEN = 3;
+    private static final long serialVersionUID = 1458049632137078049L;
     private final Map<String, String> viewMap = new HashMap<>(16);
 
     protected Set<String> getViewList() {
@@ -34,12 +42,14 @@ public class ViewServlet extends HttpServlet {
         String path = null;
         try {
             URL url = getServletContext().getResource(PREFIX);
-            path = url.getFile().substring(1);
+            path = url.getFile();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         assert path != null;
         File file = new File(path);
+        System.out.println("Scan: " + file);
+        System.out.println(Arrays.toString(file.list()));
         File[] files = file.listFiles(File::isFile);
         assert files != null;
         Arrays.stream(files).forEach((f -> {

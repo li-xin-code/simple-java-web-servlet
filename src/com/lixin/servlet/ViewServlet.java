@@ -13,6 +13,9 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 /**
+ * 响应页面请求
+ * 初始化阶段扫描 {web/page/}目录加载页面文件
+ * 文件名和路径存入viewMap
  * @author lx
  * @date 2022/4/5
  */

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * @author lixin
@@ -29,16 +30,18 @@ public class LoginServlet extends HttpServlet {
             throws IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        if(username == null) {
+        if (username == null) {
             return;
         }
         User loginUser = loginService.login(username, password);
-        if(loginUser == null) {
-            return;
+        if (loginUser != null) {
+            HttpSession session = req.getSession();
+            session.setAttribute("user", loginUser.getUsername());
+            resp.sendRedirect(req.getContextPath() + "/user-index");
+        } else {
+            PrintWriter writer = resp.getWriter();
+            writer.println("用户名或密码错误，登陆失败");
         }
-        HttpSession session = req.getSession();
-        session.setAttribute("user", loginUser.getUsername());
-        resp.sendRedirect(req.getContextPath() + "/");
     }
 
 }

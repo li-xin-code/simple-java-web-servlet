@@ -4,9 +4,7 @@ import com.lixin.dao.UserDao;
 import com.lixin.model.entity.User;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class UserDaoImplInMemory implements UserDao {
 

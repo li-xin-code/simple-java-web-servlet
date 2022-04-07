@@ -6,6 +6,7 @@ public interface UserDao {
 
     /**
      * find user by username
+     *
      * @param username username
      * @return user
      */
@@ -13,6 +14,7 @@ public interface UserDao {
 
     /**
      * add user
+     *
      * @param user user
      * @return succeed or not
      */

@@ -21,11 +21,19 @@ public abstract class GenericFilter implements Filter {
         }
     }
 
+    /**
+     * filter
+     *
+     * @param request  request
+     * @param response response
+     * @param chain    chain
+     * @throws IOException      IOException
+     * @throws ServletException ServletException
+     */
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response,
-                         FilterChain chain) throws IOException, ServletException {
-
-    }
+    public abstract void doFilter(ServletRequest request,
+                                  ServletResponse response, FilterChain chain)
+            throws IOException, ServletException;
 
     @Override
     public void destroy() {

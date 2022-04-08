@@ -11,9 +11,11 @@ import java.io.IOException;
  */
 @WebServlet(name = "simpleServlet", urlPatterns = "/message")
 public class SimpleServlet extends HttpServlet {
+    private static final long serialVersionUID = -474218327523067831L;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
-        resp.getWriter().println("A simple message.");
+        resp.getWriter().print("A simple message.");
     }
 }

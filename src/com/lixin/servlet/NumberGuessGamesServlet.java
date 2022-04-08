@@ -56,7 +56,7 @@ public class NumberGuessGamesServlet extends HttpServlet {
             return;
         }
         String result = guess < target ? "smaller" : "bigger";
-        resp.getWriter().println(result);
+        resp.getWriter().print(result);
     }
 
     protected void printMap() {

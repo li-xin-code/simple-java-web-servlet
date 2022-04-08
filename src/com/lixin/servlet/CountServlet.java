@@ -21,6 +21,6 @@ public class CountServlet extends HttpServlet {
         Integer count = (Integer) servletContext.getAttribute("count");
         count = count == null ? 1 : count + 1;
         servletContext.setAttribute("count", count);
-        resp.getWriter().println(count);
+        resp.getWriter().print(count);
     }
 }

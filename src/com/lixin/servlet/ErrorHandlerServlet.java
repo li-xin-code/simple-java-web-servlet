@@ -25,9 +25,9 @@ public class ErrorHandlerServlet extends HttpServlet {
         JsonUtils.JsonObject result = JsonUtils.getJsonObj();
         result.add("status", status);
         result.add("message", "request error");
-        System.out.println("/error =>" + result.toJsonString());
-        writer.println(result.toJsonString());
+        System.out.println("/error => " + result.toJsonString());
         resp.setContentType("application/json");
+        writer.print(result.toJsonString());
     }
 
 }

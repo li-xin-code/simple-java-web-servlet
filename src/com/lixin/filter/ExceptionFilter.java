@@ -31,8 +31,8 @@ public class ExceptionFilter extends GenericFilter {
             result.add("message", "request error");
             result.add("data", e.getMessage());
             System.out.println("exceptionFilter => " + result.toJsonString());
-            writer.println(result.toJsonString());
             response.setContentType("application/json");
+            writer.print(result.toJsonString());
         }
 
     }

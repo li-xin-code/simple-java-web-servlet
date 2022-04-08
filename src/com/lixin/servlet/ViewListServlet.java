@@ -26,7 +26,7 @@ public class ViewListServlet extends ViewServlet {
             throws IOException {
         Object[] viewArray = getViewList().toArray();
         PrintWriter writer = resp.getWriter();
-        writer.println(Arrays.toString(viewArray));
+        writer.print(Arrays.toString(viewArray));
     }
 
 }

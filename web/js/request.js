@@ -1,10 +1,9 @@
 import {xhrGet} from "./common.js";
 
-const baseUrl = "http://localhost:8080/simple/"
 
 export function getViewList() {
     return new Promise((resolve, reject) => {
-        const listXhr = xhrGet(baseUrl + "view-list");
+        const listXhr = xhrGet("/view/list");
         let result;
         listXhr.onreadystatechange = () => {
             if (listXhr.readyState === 4) {
@@ -15,7 +14,7 @@ export function getViewList() {
                 } else {
                     reject({
                         status: listXhr.status,
-                        message: "request fail",
+                        message: "request 　fail",
                         data: listXhr.responseText
                     });
                 }

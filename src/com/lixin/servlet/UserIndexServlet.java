@@ -34,7 +34,7 @@ public class UserIndexServlet extends HttpServlet {
             resp.addCookie(cookie);
         }
         String html = HtmlUtils.getBaseHtml("userIndex", content);
-        writer.println(html);
+        writer.print(html);
     }
 
 }

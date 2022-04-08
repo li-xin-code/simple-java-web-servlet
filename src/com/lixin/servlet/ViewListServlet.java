@@ -5,13 +5,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Set;
+import java.util.Arrays;
 
 /**
  * @author lx
  * @date 2022/4/5
  */
-@WebServlet(name = "viewListServlet", urlPatterns = "/view-list")
+@WebServlet(name = "viewListServlet", urlPatterns = "/view/list")
 public class ViewListServlet extends ViewServlet {
 
     private static final long serialVersionUID = -851211348418813695L;
@@ -24,9 +24,9 @@ public class ViewListServlet extends ViewServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
-        Set<?> viewList = getViewList();
+        Object[] viewArray = getViewList().toArray();
         PrintWriter writer = resp.getWriter();
-        viewList.forEach(s -> writer.print(s + ";"));
+        writer.println(Arrays.toString(viewArray));
     }
 
 }

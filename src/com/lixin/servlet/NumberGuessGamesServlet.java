@@ -18,6 +18,7 @@ import java.util.Random;
 public class NumberGuessGamesServlet extends HttpServlet {
 
     private static final String METHOD_GET = "GET";
+    private static final long serialVersionUID = -6214262480134499398L;
     Map<String, Integer> map = new HashMap<>(16);
 
     @Override
@@ -59,8 +60,8 @@ public class NumberGuessGamesServlet extends HttpServlet {
     }
 
     protected void printMap() {
-        System.out.println("=====Start=====");
+        System.out.println("=====View Map Start=====");
         map.keySet().forEach(key -> System.out.println(key + ":" + map.get(key)));
-        System.out.println("=====End=====");
+        System.out.println("=====View Map End=====");
     }
 }

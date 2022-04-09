@@ -1,5 +1,6 @@
 package com.lixin.filter;
 
+import com.lixin.common.enums.HttpStatus;
 import com.lixin.common.utils.json.JsonObject;
 import com.lixin.common.utils.json.JsonUtils;
 
@@ -16,8 +17,6 @@ import java.io.PrintWriter;
 @WebFilter(filterName = "exceptionFilter", urlPatterns = "/*")
 public class ExceptionFilter extends GenericFilter {
 
-    private static final int ERROR = 500;
-
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
                          FilterChain chain)
@@ -27,11 +26,10 @@ public class ExceptionFilter extends GenericFilter {
         } catch (Exception e) {
             PrintWriter writer = response.getWriter();
             writer.flush();
-            JsonObject result = JsonUtils.httpResult(ERROR, "request error", e.getMessage());
-
-            System.out.println("exceptionFilter => " + result.toString());
+            JsonObject result = JsonUtils.httpResult(
+                    HttpStatus.ERROR.getCode(), "request error", e.getMessage());
             response.setContentType("application/json");
-            writer.print(result.toString());
+            writer.print(result);
         }
 
     }

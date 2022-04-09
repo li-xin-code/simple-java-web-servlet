@@ -1,5 +1,6 @@
 package com.lixin.filter;
 
+import com.lixin.common.enums.HttpStatus;
 import com.lixin.common.utils.json.JsonObject;
 import com.lixin.common.utils.json.JsonUtils;
 
@@ -11,6 +12,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * @author lixin
@@ -33,8 +35,21 @@ public class JsonFilter extends GenericFilter {
             while ((line = reader.readLine()) != null) {
                 builder.append(line);
             }
-            JsonObject jsonObject = JsonUtils.parse(builder.toString());
-            jsonObject.getKeys().forEach(k -> req.setAttribute(k, jsonObject.getValue(k)));
+            JsonObject jsonObject;
+            try {
+                jsonObject = JsonUtils.parse(builder.toString());
+                for (String key : jsonObject.getKeys()) {
+                    req.setAttribute(key, jsonObject.getValue(key));
+                }
+            } catch (Exception e) {
+                PrintWriter writer = response.getWriter();
+                writer.flush();
+                JsonObject result = JsonUtils.httpResult(
+                        HttpStatus.ERROR.getCode(), "request error", e.getMessage());
+                response.setContentType("application/json");
+                writer.print(result);
+                return;
+            }
         }
         chain.doFilter(req, response);
     }

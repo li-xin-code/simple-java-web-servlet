@@ -26,7 +26,7 @@ public class ErrorHandlerServlet extends HttpServlet {
         JsonObject result = JsonUtils.httpResult
                 (status, "request error", "error handler");
         resp.setContentType("application/json");
-        writer.print(result.toString());
+        writer.print(result);
     }
 
 }

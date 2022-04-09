@@ -2,8 +2,8 @@ package com.lixin.common.utils.json;
 
 import com.lixin.common.utils.StrUtils;
 
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -15,7 +15,7 @@ public class JsonObject {
     private final Map<String, String> map;
 
     public JsonObject() {
-        map = new HashMap<>(16);
+        map = new LinkedHashMap<>(3);
     }
 
     public void add(String name, String value) {
@@ -23,7 +23,7 @@ public class JsonObject {
     }
 
     public String getValue(String key) {
-        return map.get(key).toString();
+        return map.get(key);
     }
 
     public Set<String> getKeys() {

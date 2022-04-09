@@ -9,7 +9,8 @@ export function getViewList() {
             if (listXhr.readyState === 4) {
                 if (listXhr.status === 200) {
                     let context = listXhr.responseText;
-                    result = context.substring(1, context.length - 2).split(",");
+                    context = context.replaceAll(/( )|(\[)|(])/g, "");
+                    result = context.split(",");
                     resolve(result);
                 } else {
                     reject({

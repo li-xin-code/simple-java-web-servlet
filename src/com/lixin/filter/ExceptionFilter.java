@@ -1,6 +1,7 @@
 package com.lixin.filter;
 
-import com.lixin.common.utils.JsonUtils;
+import com.lixin.common.utils.json.JsonObject;
+import com.lixin.common.utils.json.JsonUtils;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletRequest;
@@ -26,13 +27,11 @@ public class ExceptionFilter extends GenericFilter {
         } catch (Exception e) {
             PrintWriter writer = response.getWriter();
             writer.flush();
-            JsonUtils.JsonObject result = JsonUtils.getJsonObj();
-            result.add("status", ERROR);
-            result.add("message", "request error");
-            result.add("data", e.getMessage());
-            System.out.println("exceptionFilter => " + result.toJsonString());
+            JsonObject result = JsonUtils.httpResult(ERROR, "request error", e.getMessage());
+
+            System.out.println("exceptionFilter => " + result.toString());
             response.setContentType("application/json");
-            writer.print(result.toJsonString());
+            writer.print(result.toString());
         }
 
     }

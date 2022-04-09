@@ -1,11 +1,11 @@
-<%@ page import="com.lixin.model.entity.User" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2022/3/3
   Time: 16:17
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Simple</title>
@@ -27,7 +27,7 @@
 <script type="module">
     import {getViewList} from "./js/request.js";
 
-    await getViewList().then((list) => {
+    getViewList().then((list) => {
         let viewList = document.getElementById("viewList");
         list.forEach((viewName, index) => {
             if (viewName !== "") {

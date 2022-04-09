@@ -1,6 +1,7 @@
 package com.lixin.servlet;
 
-import com.lixin.common.utils.JsonUtils;
+import com.lixin.common.utils.json.JsonObject;
+import com.lixin.common.utils.json.JsonUtils;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,12 +23,10 @@ public class ErrorHandlerServlet extends HttpServlet {
         int status = resp.getStatus();
         PrintWriter writer = resp.getWriter();
         writer.flush();
-        JsonUtils.JsonObject result = JsonUtils.getJsonObj();
-        result.add("status", status);
-        result.add("message", "request error");
-        System.out.println("/error => " + result.toJsonString());
+        JsonObject result = JsonUtils.httpResult
+                (status, "request error", "error handler");
         resp.setContentType("application/json");
-        writer.print(result.toJsonString());
+        writer.print(result.toString());
     }
 
 }

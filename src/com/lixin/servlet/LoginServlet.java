@@ -1,5 +1,6 @@
 package com.lixin.servlet;
 
+import com.lixin.common.utils.HtmlUtils;
 import com.lixin.model.entity.User;
 import com.lixin.service.LoginService;
 import com.lixin.service.impl.LoginServiceImpl;
@@ -40,7 +41,8 @@ public class LoginServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/user-index");
         } else {
             PrintWriter writer = resp.getWriter();
-            writer.println("用户名或密码错误，登陆失败");
+            String content = "用户名或密码错误，登陆失败";
+            writer.print(HtmlUtils.getBaseHtml("login", content));
         }
     }
 

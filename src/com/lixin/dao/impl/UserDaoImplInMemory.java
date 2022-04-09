@@ -6,9 +6,20 @@ import com.lixin.model.entity.User;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * UserDaoImplInMemory
+ *
+ * @author lixin
+ */
 public class UserDaoImplInMemory implements UserDao {
 
     private final List<User> userList = new ArrayList<>(10);
+
+    private static final UserDao USER_DAO = new UserDaoImplInMemory();
+
+    public static UserDao getUserDao() {
+        return USER_DAO;
+    }
 
     public UserDaoImplInMemory() {
         userList.add(new User("admin", "admin"));
@@ -33,4 +44,10 @@ public class UserDaoImplInMemory implements UserDao {
         userList.add(user);
         return true;
     }
+
+    @Override
+    public List<User> list() {
+        return new ArrayList<>(userList);
+    }
+
 }

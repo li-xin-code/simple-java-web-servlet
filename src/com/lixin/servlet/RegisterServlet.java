@@ -32,6 +32,7 @@ public class RegisterServlet extends HttpServlet {
         User user = new User(username, password);
         System.out.println(user);
         userService.add(user);
+        System.out.println(userService.list());
         HttpSession session = req.getSession();
         session.setAttribute("user", username);
         resp.sendRedirect(req.getContextPath() + "/");

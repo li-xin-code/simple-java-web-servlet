@@ -2,7 +2,13 @@ package com.lixin.service;
 
 import com.lixin.model.entity.User;
 
+/**
+ * 登陆服务
+ *
+ * @author lixin
+ */
 public interface LoginService {
+    
     /**
      * login
      *
@@ -11,4 +17,5 @@ public interface LoginService {
      * @return user
      */
     User login(String username, String password);
+
 }

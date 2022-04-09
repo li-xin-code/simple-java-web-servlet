@@ -2,6 +2,11 @@ package com.lixin.dao;
 
 import com.lixin.model.entity.User;
 
+import java.util.List;
+
+/**
+ * @author lixin
+ */
 public interface UserDao {
 
     /**
@@ -19,5 +24,12 @@ public interface UserDao {
      * @return succeed or not
      */
     Boolean addUser(User user);
+
+    /**
+     * all users
+     *
+     * @return list
+     */
+    List<User> list();
 
 }

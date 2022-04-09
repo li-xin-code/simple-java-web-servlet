@@ -5,12 +5,15 @@ import com.lixin.dao.impl.UserDaoImplInMemory;
 import com.lixin.model.entity.User;
 import com.lixin.service.LoginService;
 
+/**
+ * @author lixin
+ */
 public class LoginServiceImpl implements LoginService {
 
     private final UserDao userDao;
 
     public LoginServiceImpl() {
-        userDao = new UserDaoImplInMemory();
+        userDao = UserDaoImplInMemory.getUserDao();
     }
 
     @Override
@@ -24,4 +27,5 @@ public class LoginServiceImpl implements LoginService {
         }
         return result;
     }
+
 }

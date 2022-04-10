@@ -8,11 +8,12 @@ import com.lixin.model.entity.User;
  * @author lixin
  */
 public class JsonObjTest {
-    
+
     public static void main(String[] args) {
         JsonObject object = new JsonObject();
         User user = new User("abc", "abc");
-        System.out.println(JsonUtils.toJsonString(user));
+        object.add("user", user);
+        System.out.println(object);
         System.out.println(JsonUtils.toJsonString("AAA"));
         byte b = 1;
         System.out.println(JsonUtils.toJsonString(b));

@@ -21,7 +21,7 @@ public class UserDaoImplInMemory implements UserDao {
         return USER_DAO;
     }
 
-    public UserDaoImplInMemory() {
+    private UserDaoImplInMemory() {
         userList.add(new User("admin", "admin"));
         userList.add(new User("user", "password"));
         userList.add(new User("张三", "123456"));

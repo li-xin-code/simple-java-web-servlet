@@ -1,7 +1,5 @@
 package com.lixin.common.utils.json;
 
-import com.lixin.common.utils.StrUtils;
-
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -18,8 +16,8 @@ public class JsonObject {
         map = new LinkedHashMap<>(3);
     }
 
-    public void add(String name, String value) {
-        map.put(name, value);
+    public void add(String name, Object value) {
+        map.put(name, JsonUtils.toJsonString(value));
     }
 
     public String getValue(String key) {
@@ -37,12 +35,7 @@ public class JsonObject {
         while (iterator.hasNext()) {
             String key = iterator.next();
             builder.append("    \"").append(key).append("\"");
-            String value = map.get(key);
-            if (StrUtils.isNum(value)) {
-                builder.append(" : ").append(value);
-            } else {
-                builder.append(" : \"").append(value).append("\"");
-            }
+            builder.append(" : ").append(map.get(key));
             if (iterator.hasNext()) {
                 builder.append(",");
             }

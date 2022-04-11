@@ -1,5 +1,6 @@
 package com.lixin.common.utils.json;
 
+import com.lixin.common.enums.HttpStatus;
 import com.lixin.common.utils.StrUtils;
 
 import java.util.Arrays;
@@ -28,6 +29,14 @@ public class JsonUtils {
         JsonObject jsonObject = new JsonObject();
         jsonObject.add("status", status);
         jsonObject.add("message", message);
+        jsonObject.add("data", data);
+        return jsonObject;
+    }
+
+    public static JsonObject httpSuccess(Object data) {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.add("status", HttpStatus.SUCCESS.getCode());
+        jsonObject.add("message", "success");
         jsonObject.add("data", data);
         return jsonObject;
     }

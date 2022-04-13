@@ -46,7 +46,6 @@ public class JsonUtils {
             return "null";
         }
         Class<?> aClass = o.getClass();
-        System.out.println(aClass);
         if (BASE.contains(aClass)) {
             return o.toString();
         } else if (String.class == aClass) {

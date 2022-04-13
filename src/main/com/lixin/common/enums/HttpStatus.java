@@ -17,7 +17,11 @@ public enum HttpStatus {
     /**
      * resource not find
      */
-    NOT_FIND(404);
+    NOT_FIND(404),
+    /**
+     * bad request
+     */
+    FAIL(400);
 
     /**
      * 状态码
@@ -31,5 +35,5 @@ public enum HttpStatus {
     public int getCode() {
         return code;
     }
-    
+
 }

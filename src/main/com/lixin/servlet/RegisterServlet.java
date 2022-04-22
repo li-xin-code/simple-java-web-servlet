@@ -1,6 +1,9 @@
 package com.lixin.servlet;
 
+import com.lixin.common.utils.json.JsonObject;
+import com.lixin.common.utils.json.JsonUtils;
 import com.lixin.model.entity.User;
+import com.lixin.model.form.RegisterForm;
 import com.lixin.service.UserService;
 import com.lixin.service.impl.UserServiceImpl;
 
@@ -10,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * @author lx
@@ -27,15 +31,18 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
-        User user = new User(username, password);
-        System.out.println(user);
-        userService.add(user);
-        System.out.println(userService.list());
+        String username = (String) req.getAttribute("username");
+        String password = (String) req.getAttribute("password");
+        String repeatPassword = (String) req.getAttribute("repeat_password");
+
+        User user = userService.register(new RegisterForm(username, password, repeatPassword));
         HttpSession session = req.getSession();
-        session.setAttribute("user", username);
-        resp.sendRedirect(req.getContextPath() + "/");
+        session.setAttribute("user", user.getUsername());
+
+        resp.setContentType("application/json");
+        PrintWriter writer = resp.getWriter();
+        JsonObject success = JsonUtils.httpSuccess(user.getUsername());
+        writer.print(success);
     }
 
 }

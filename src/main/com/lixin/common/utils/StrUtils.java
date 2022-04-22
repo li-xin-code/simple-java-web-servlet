@@ -11,7 +11,7 @@ public class StrUtils {
     }
 
     public static boolean isNum(String str) {
-        return Pattern.matches("[0-9]*", str);
+        return Pattern.matches("[0-9]+", str);
     }
 
 }

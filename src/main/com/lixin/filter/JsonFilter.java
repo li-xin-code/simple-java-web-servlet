@@ -38,6 +38,7 @@ public class JsonFilter extends GenericFilter {
             JsonObject jsonObject;
             try {
                 jsonObject = JsonUtils.parse(builder.toString());
+                System.out.println("jsonFilter: " + jsonObject.mapString());
                 for (String key : jsonObject.getKeys()) {
                     req.setAttribute(key, jsonObject.getValue(key));
                 }

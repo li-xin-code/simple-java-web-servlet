@@ -25,9 +25,9 @@
 </div>
 </body>
 <script type="module">
-    import {getViewList} from "./js/request.js";
+    import {viewList} from "./js/request/ViewList.js";
 
-    getViewList().then((list) => {
+    viewList().then((list) => {
         let viewList = document.getElementById("viewList");
         list.forEach((viewName, index) => {
             if (viewName !== "") {

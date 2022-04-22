@@ -17,3 +17,10 @@ export function xhrGet(url, parameter = {}) {
     xhr.open('GET', baseUrl + url);
     return xhr;
 }
+
+export function xhrJsonPost(url) {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", baseUrl + url);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    return xhr;
+}

@@ -1,7 +1,6 @@
-import {xhrGet} from "./common.js";
+import {xhrGet} from "../common.js";
 
-
-export function getViewList() {
+export function viewList() {
     return new Promise((resolve, reject) => {
         const listXhr = xhrGet("/view/list");
         let result;

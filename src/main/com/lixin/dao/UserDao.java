@@ -32,4 +32,12 @@ public interface UserDao {
      */
     List<User> list();
 
+    /**
+     * Does the username exist.
+     *
+     * @param username ...
+     * @return ...
+     */
+    Boolean isExist(String username);
+
 }

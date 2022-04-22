@@ -50,4 +50,14 @@ public class UserDaoImplInMemory implements UserDao {
         return new ArrayList<>(userList);
     }
 
+    @Override
+    public Boolean isExist(String username) {
+        for (User user : userList) {
+            if (user.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

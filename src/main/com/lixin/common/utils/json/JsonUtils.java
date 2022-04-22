@@ -41,6 +41,13 @@ public class JsonUtils {
         return jsonObject;
     }
 
+    public static JsonObject httpFail(String msg) {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.add("status", HttpStatus.FAIL.getCode());
+        jsonObject.add("message", msg);
+        return jsonObject;
+    }
+
     public static String toJsonString(Object o) {
         if (o == null) {
             return "null";
@@ -73,7 +80,7 @@ public class JsonUtils {
                 return Arrays.deepToString((Object[]) o);
             }
         }
-        return o.toString();
+        return String.format("\"%s\"", o);
     }
 
     public static JsonObject parse(String json) {
@@ -83,6 +90,7 @@ public class JsonUtils {
         for (String element : elements) {
             String[] strings = element.split(":");
             if (strings.length > 2) {
+                System.out.println(Arrays.toString(strings));
                 throw new RuntimeException("json parse fail");
             }
             String key = strings[0];

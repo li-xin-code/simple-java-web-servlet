@@ -2,8 +2,9 @@ package com.lixin.servlet;
 
 import com.lixin.common.utils.HtmlUtils;
 import com.lixin.model.entity.User;
-import com.lixin.service.LoginService;
-import com.lixin.service.impl.LoginServiceImpl;
+import com.lixin.model.form.LoginForm;
+import com.lixin.service.UserService;
+import com.lixin.service.impl.UserServiceImpl;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,10 +21,10 @@ import java.io.PrintWriter;
 public class LoginServlet extends HttpServlet {
 
     private static final long serialVersionUID = -5167442880274699389L;
-    private final LoginService loginService;
+    private final UserService userService;
 
     public LoginServlet() {
-        loginService = new LoginServiceImpl();
+        userService = new UserServiceImpl();
     }
 
     @Override
@@ -34,7 +35,7 @@ public class LoginServlet extends HttpServlet {
         if (username == null) {
             return;
         }
-        User loginUser = loginService.login(username, password);
+        User loginUser = userService.login(new LoginForm(username, password));
         if (loginUser != null) {
             HttpSession session = req.getSession();
             session.setAttribute("user", loginUser.getUsername());

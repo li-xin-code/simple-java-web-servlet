@@ -21,7 +21,7 @@ public class JsonObject {
     }
 
     public String getValue(String key) {
-        return map.get(key);
+        return map.get(key).replaceAll("\"", "");
     }
 
     public Set<String> getKeys() {
@@ -34,7 +34,7 @@ public class JsonObject {
         Iterator<String> iterator = map.keySet().iterator();
         while (iterator.hasNext()) {
             String key = iterator.next();
-            builder.append("    \"").append(key).append("\"");
+            builder.append("\"").append(key).append("\"");
             builder.append(" : ").append(map.get(key));
             if (iterator.hasNext()) {
                 builder.append(",");
@@ -42,6 +42,10 @@ public class JsonObject {
         }
         builder.append(" }");
         return builder.toString();
+    }
+
+    public String mapString() {
+        return map.toString();
     }
 
 }

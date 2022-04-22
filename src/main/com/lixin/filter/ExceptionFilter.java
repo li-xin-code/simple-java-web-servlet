@@ -25,13 +25,13 @@ public class ExceptionFilter extends GenericFilter {
         try {
             chain.doFilter(request, response);
         } catch (Exception e) {
+            ((HttpServletResponse) response).setStatus(HttpStatus.ERROR.getCode());
+            response.setContentType("application/json");
             PrintWriter writer = response.getWriter();
             writer.flush();
             JsonObject result = JsonUtils.httpResult(
                     HttpStatus.ERROR.getCode(), "request exception", e.getMessage());
-            response.setContentType("application/json");
             writer.print(result);
-            ((HttpServletResponse) response).setStatus(HttpStatus.ERROR.getCode());
         }
 
     }

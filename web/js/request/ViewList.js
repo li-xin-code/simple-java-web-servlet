@@ -1,4 +1,4 @@
-import {xhrGet} from "../common.js";
+import {xhrGet} from "./common.js";
 
 export function viewList() {
     return new Promise((resolve, reject) => {

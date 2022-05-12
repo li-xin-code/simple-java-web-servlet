@@ -1,4 +1,4 @@
-import {xhrGet, xhrJsonPost} from "../common.js";
+import {xhrGet, xhrJsonPost} from "./common.js";
 
 export function register(data) {
     return new Promise((resolve, reject) => {

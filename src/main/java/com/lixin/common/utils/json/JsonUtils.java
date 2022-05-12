@@ -1,5 +1,6 @@
 package com.lixin.common.utils.json;
 
+import com.alibaba.fastjson.JSON;
 import com.lixin.common.enums.HttpStatus;
 import com.lixin.common.utils.StrUtils;
 
@@ -49,38 +50,7 @@ public class JsonUtils {
     }
 
     public static String toJsonString(Object o) {
-        if (o == null) {
-            return "null";
-        }
-        Class<?> aClass = o.getClass();
-        if (BASE.contains(aClass)) {
-            return o.toString();
-        } else if (String.class == aClass) {
-            return String.format("\"%s\"", o);
-        } else if (Character.class == aClass) {
-            return String.format("'%s'", o);
-        } else if (aClass.isArray()) {
-            if (aClass == byte[].class) {
-                return Arrays.toString((byte[]) o);
-            } else if (aClass == short[].class) {
-                return Arrays.toString((short[]) o);
-            } else if (aClass == int[].class) {
-                return Arrays.toString((int[]) o);
-            } else if (aClass == long[].class) {
-                return Arrays.toString((long[]) o);
-            } else if (aClass == char[].class) {
-                return Arrays.toString((char[]) o);
-            } else if (aClass == float[].class) {
-                return Arrays.toString((float[]) o);
-            } else if (aClass == double[].class) {
-                return Arrays.toString((double[]) o);
-            } else if (aClass == boolean[].class) {
-                return Arrays.toString((boolean[]) o);
-            } else {
-                return Arrays.deepToString((Object[]) o);
-            }
-        }
-        return String.format("\"%s\"", o);
+        return JSON.toJSONString(o);
     }
 
     public static JsonObject parse(String json) {

@@ -25,6 +25,7 @@ public class ExceptionFilter extends GenericFilter {
         try {
             chain.doFilter(request, response);
         } catch (Exception e) {
+            e.printStackTrace();
             ((HttpServletResponse) response).setStatus(HttpStatus.ERROR.getCode());
             response.setContentType("application/json");
             PrintWriter writer = response.getWriter();

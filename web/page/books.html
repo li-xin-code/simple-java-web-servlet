@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>books</title>
+    <link href="/simple/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/simple/css/common.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .content {
+            width: 80vw;
+        }
+
+        .book {
+            position: relative;
+            height: 50px;
+            border: #93a1a1 1px;
+            border-style: none none solid none;
+        }
+
+        .book_name {
+            padding-left: 10px;
+            line-height: 50px;
+        }
+
+        .title {
+            position: relative;
+            width: 80vw;
+            height: 13vh;
+            padding: 20px;
+            text-align: center;
+            border: #93a1a1 1px;
+            border-style: none none solid none;
+            font-size: 24px;
+        }
+
+        .book_index {
+            display: none;
+        }
+
+        .operate {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 5px;
+        }
+
+        .btn {
+            height: 30px;
+            line-height: 16px;
+            margin: 0 5px;
+        }
+
+        .add-book {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+        }
+    </style>
+
+</head>
+<body>
+<div id="app">
+    <div class="title">
+        <span class="h1">书</span>
+        <span class="h1" style="margin-left: 100px">架</span>
+        <button class="btn btn-primary add-book" type="button">添加新书</button>
+    </div>
+    <div class="content">
+        <div class="books"></div>
+    </div>
+
+</div>
+
+<script src="/simple/js/jquery-3.6.0.min.js"></script>
+<script src="/simple/js/bootstrap.min.js"></script>
+</body>
+<script type="module">
+    import {add, books, del, rename} from "../js/request/book.js";
+
+    function bookDom(index, data) {
+        const itemDom = document.createElement('div');
+        const nameDom = document.createElement('span');
+        const indexDom = document.createElement('span');
+        const operateDom = document.createElement('div');
+        const delBtn = document.createElement('button');
+        const updateBtn = document.createElement('button');
+
+        itemDom.classList.add('book')
+        nameDom.innerText = data[index].name
+        nameDom.classList.add('book_name')
+        indexDom.innerText = index
+        indexDom.classList.add('book_index')
+        updateBtn.innerText = '修改'
+        delBtn.innerText = '删除'
+        updateBtn.classList.add('btn', 'btn-primary')
+        delBtn.classList.add('btn', 'btn-danger')
+        operateDom.classList.add('operate')
+
+        operateDom.append(updateBtn)
+        operateDom.append(delBtn)
+        itemDom.append(nameDom)
+        itemDom.append(indexDom)
+        itemDom.append(operateDom)
+        itemDom.onclick = (event) => {
+            const dom = event.currentTarget
+            const operate = dom.querySelector('.operate')
+            const display = operate.style.display
+            operate.style.display = display === 'block' ? 'none' : 'block'
+        }
+        updateBtn.onclick = async ev => {
+            const dom = ev.currentTarget.parentNode.parentNode
+            const index = dom.querySelector('.book_index').innerText
+            const name = prompt("输入新书名");
+            if (name === '') {
+                return
+            }
+            await rename(data[index].uuid, name)
+            await view()
+            ev.stopPropagation()
+        }
+        delBtn.onclick = async ev => {
+            const dom = ev.currentTarget.parentNode.parentNode
+            const index = dom.querySelector('.book_index').innerText
+            const flag = confirm("确认删除？");
+            if (flag) {
+                await del(data[index].uuid)
+                await view()
+            }
+            ev.stopPropagation()
+        }
+        return itemDom
+    }
+
+    const view = async () => {
+        try {
+            const {data} = await books()
+            const root = document.querySelector('.books');
+            root.innerHTML = ''
+            for (let i = 0; i < data.length; i++) {
+                const item = bookDom(i, data)
+                root.appendChild(item);
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    view()
+
+    const addBtn = document.querySelector('.add-book');
+    addBtn.onclick = async () => {
+        const name = prompt("输入新书书名");
+        if (name === '') {
+            return
+        }
+        console.log(name)
+        await add(name)
+        await view()
+    }
+
+</script>
+</html>

@@ -12,7 +12,7 @@ import java.util.Enumeration;
 public abstract class GenericFilter implements Filter {
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
         System.out.println("init: " + filterConfig.getFilterName());
         Enumeration<String> names = filterConfig.getInitParameterNames();
         if (names.hasMoreElements()) {

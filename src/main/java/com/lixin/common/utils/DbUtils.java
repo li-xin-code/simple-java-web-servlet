@@ -1,6 +1,7 @@
 package com.lixin.common.utils;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
+import org.apache.commons.dbutils.QueryRunner;
 
 import javax.sql.DataSource;
 import java.io.InputStream;
@@ -11,16 +12,16 @@ import java.util.Properties;
 /**
  * @author lixin
  */
-public class JdbcUtils {
+public class DbUtils {
 
-    private JdbcUtils() {
+    private DbUtils() {
     }
 
     private static final DataSource DATA_SOURCE;
 
     static {
         try {
-            InputStream in = JdbcUtils.class.getClassLoader()
+            InputStream in = DbUtils.class.getClassLoader()
                     .getResourceAsStream("datasource.properties");
             Properties properties = new Properties();
             properties.load(in);
@@ -30,8 +31,8 @@ public class JdbcUtils {
         }
     }
 
-    public static DataSource getDataSource() {
-        return DATA_SOURCE;
+    public static QueryRunner getRunner() {
+        return new QueryRunner(DATA_SOURCE);
     }
 
     public static Connection getConnection() {

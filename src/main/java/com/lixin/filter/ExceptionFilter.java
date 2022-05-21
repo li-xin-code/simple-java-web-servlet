@@ -34,6 +34,5 @@ public class ExceptionFilter extends GenericFilter {
                     HttpStatus.ERROR.getCode(), "request exception", e.getMessage());
             writer.print(result);
         }
-
     }
 }

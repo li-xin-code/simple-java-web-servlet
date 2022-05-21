@@ -1,6 +1,6 @@
 package com.lixin.test;
 
-import com.lixin.common.utils.JdbcUtils;
+import com.lixin.common.utils.DbUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +12,7 @@ import java.sql.SQLException;
  */
 public class JdbcTest {
     public static void main(String[] args) {
-        Connection connection = JdbcUtils.getConnection();
+        Connection connection = DbUtils.getConnection();
         String sql = "select * from book";
         ResultSet res = null;
         PreparedStatement pre = null;

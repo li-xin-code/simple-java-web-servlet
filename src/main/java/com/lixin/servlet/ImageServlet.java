@@ -24,8 +24,10 @@ import static com.lixin.common.utils.SystemUtils.UPLOAD_PATH;
 /**
  * @author lixin
  */
-@WebServlet(name = "imageServlet", urlPatterns = "/ui/*")
+@WebServlet(name = "imageServlet", urlPatterns = ImageServlet.URL_PATTERNS + "*")
 public class ImageServlet extends HttpServlet {
+
+    public static final String URL_PATTERNS = "/ui/";
 
     private static final long serialVersionUID = -372121073383305839L;
 

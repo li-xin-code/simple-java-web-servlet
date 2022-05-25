@@ -5,22 +5,11 @@ import com.lixin.common.enums.HttpStatus;
 import com.lixin.common.utils.StrUtils;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author lixin
  */
 public class JsonUtils {
-
-    private static final Set<Class<?>> BASE = new HashSet<>();
-
-    static {
-        Class<?>[] baseArr = {Integer.class, Short.class, Long.class,
-                Byte.class, Boolean.class, Float.class, Double.class};
-        BASE.addAll(Arrays.asList(baseArr));
-    }
-
 
     private JsonUtils() {
     }

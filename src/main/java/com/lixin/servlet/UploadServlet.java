@@ -42,7 +42,9 @@ public class UploadServlet extends HttpServlet {
         if (file == null) {
             throw new NotExpectedException("file is null.");
         }
-        if (!CONTENT_TYPE_MAP.containsValue(file.getContentType().toLowerCase())) {
+        String type = file.getContentType().toLowerCase();
+        String imageStart = "image/";
+        if (!(type.startsWith(imageStart) && CONTENT_TYPE_MAP.containsValue(type))) {
             throw new NotExpectedException("Unsupported file type.");
         }
         String fileName = file.getSubmittedFileName();
@@ -50,6 +52,6 @@ public class UploadServlet extends HttpServlet {
         String uuid = UUID.randomUUID().toString().replaceAll("-", "");
         String newFileName = uuid + suffix;
         file.write(newFileName);
-        resp.getWriter().println(newFileName);
+        resp.getWriter().println(ImageServlet.URL_PATTERNS + newFileName);
     }
 }

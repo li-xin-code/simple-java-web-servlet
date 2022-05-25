@@ -1,4 +1,4 @@
-package com.lixin.filter;
+package com.lixin.common.filter;
 
 import com.lixin.common.enums.HttpStatus;
 import com.lixin.common.utils.json.JsonObject;

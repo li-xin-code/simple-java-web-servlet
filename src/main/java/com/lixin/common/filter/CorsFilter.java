@@ -1,4 +1,4 @@
-package com.lixin.filter;
+package com.lixin.common.filter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -34,5 +34,5 @@ public class CorsFilter extends GenericFilter {
         chain.doFilter(req, resp);
 
     }
-    
+
 }

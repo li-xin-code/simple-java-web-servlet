@@ -1,4 +1,4 @@
-package com.lixin.filter;
+package com.lixin.common.filter;
 
 import com.alibaba.druid.support.http.WebStatFilter;
 

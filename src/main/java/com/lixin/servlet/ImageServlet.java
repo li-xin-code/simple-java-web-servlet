@@ -43,7 +43,7 @@ public class ImageServlet extends HttpServlet {
         List<String> parse = parse(uri);
         if (dispatcher.get(DEFAULT).apply(parse)) {
             String filename = parse.get(0);
-            String suffix = filename.substring(filename.lastIndexOf(".") + 1);
+            String suffix = filename.substring(filename.lastIndexOf(".") + 1).toLowerCase();
             if (!CONTENT_TYPE_MAP.containsKey(suffix)) {
                 throw new NotExpectedException("Unsupported file type.");
             }

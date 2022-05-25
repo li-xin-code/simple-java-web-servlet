@@ -25,7 +25,6 @@ import static com.lixin.common.utils.SystemUtils.*;
 public class UploadServlet extends HttpServlet {
     private static final long serialVersionUID = 1815231200874094764L;
 
-
     @Override
     public void init() {
         File file = new File(UPLOAD_PATH);
@@ -40,7 +39,12 @@ public class UploadServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Part file = req.getPart("file");
-        System.out.println(file.getContentType());
+        if (file == null) {
+            throw new NotExpectedException("file is null.");
+        }
+        if (!CONTENT_TYPE_MAP.containsValue(file.getContentType().toLowerCase())) {
+            throw new NotExpectedException("Unsupported file type.");
+        }
         String fileName = file.getSubmittedFileName();
         String suffix = fileName.substring(fileName.lastIndexOf("."));
         String uuid = UUID.randomUUID().toString().replaceAll("-", "");

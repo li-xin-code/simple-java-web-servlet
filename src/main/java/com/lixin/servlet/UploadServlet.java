@@ -37,7 +37,8 @@ public class UploadServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         Part file = req.getPart("file");
         if (file == null) {
             throw new NotExpectedException("file is null.");
